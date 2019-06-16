@@ -5,7 +5,7 @@ import random
 currentfoe = "Darshan"
 currentkeyword = "Rohit"
 menuactions = ["use item", "swap keyword", "fight", "run"]
-bag = ["Potion", "Super Potion"]
+bag = ["Potion", "Super Potion", "Hyper Potion"]
 mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan"]
 run = [99, 34, 56, 83, 12, 25, 8, 6]
 foehp = 100
@@ -22,6 +22,10 @@ stard = 0
 pjd = 0
 bangd = 0
 x = 0
+steps = 0
+totalcoins = 1000
+lostcoins = random.randrange(45, 90, 5)
+gainedcoins = random.randrange(45, 100, 5)
 
 # Moves
 
@@ -153,6 +157,7 @@ print("You sent " + currentkeyword + "!")
 
 
 while myhp > 0 and foehp > 0:
+    steps += 1
     print(currentfoe + "'s HP = " + str(foehp))
     print(currentkeyword + "'s HP = " + str(myhp))
 
@@ -171,6 +176,11 @@ while myhp > 0 and foehp > 0:
         elif action2 in bag and action2 == "Super Potion":
             myhp += 50
             print(currentkeyword + " gained 50 HP")
+            print(currentkeyword + " has " + str(myhp) + "HP now")
+            continue
+        elif action2 in bag and action2 == "Hyper Potion":
+            myhp += 100
+            print(currentkeyword + " gained 100 HP")
             print(currentkeyword + " has " + str(myhp) + "HP now")
             continue
         else:
@@ -238,9 +248,27 @@ while myhp > 0 and foehp > 0:
         print("Invalid action. Try again...")
         continue
 if myhp <= 0:
-    print(currentkeyword + "fainted")
+    print(currentkeyword + " fainted")
+    if steps <= 3:
+        print("You lost badly. Thats embarassing!")
+        print("You lost " + str(lostcoins + 20) + " coins")
+        totalcoins -= lostcoins - 20
+        print("Current coin balance = " + str(totalcoins))
+    else:
+        print("You lost " + str(lostcoins) + " coins")
+        totalcoins -= lostcoins
+        print("Current coin balance = " + str(totalcoins))
 elif foehp <= 0:
     print(currentfoe + " fainted")
+    if steps <= 3:
+        print("You embarassed the opponent!")
+        print("You gained " + str(gainedcoins + 20) + " coins")
+        totalcoins += gainedcoins + 20
+        print("Current coin balance = " + str(totalcoins))
+    else:
+        print("You gained " + str(gainedcoins) + "coins")
+        totalcoins += gainedcoins
+        print("Current coin balance = " + str(totalcoins))
 
 
 # Tatva
