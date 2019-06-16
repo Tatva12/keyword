@@ -5,7 +5,7 @@ import random
 currentfoe = "Darshan"
 currentkeyword = "Rohit"
 menuactions = ["use item", "swap keyword", "fight", "run"]
-bag = ["Potion", "Super Potion", "Hyper Potion"]
+bag = ["Potion 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
 mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan"]
 run = [99, 34, 56, 83, 12, 25, 8, 6]
 foehp = 100
@@ -168,20 +168,36 @@ while myhp > 0 and foehp > 0:
         action2 = input("What do you want to use?\n")
 
         if action2 in bag and action2 == "Potion":
-            myhp += 20
-            print(currentkeyword + " gained 20 HP")
-            print(currentkeyword + " has " + str(myhp) + "HP now")
-            darshanmove()
+            if totalcoins >= 50:
+                totalcoins -= 50
+                myhp += 20
+                print(currentkeyword + " gained 20 HP")
+                print(currentkeyword + " has " + str(myhp) + "HP now")
+                print("You have " + str(tatalcoins) + " now.")
+                darshanmove()
+            else:
+                print("Not enough coins!")
             continue
         elif action2 in bag and action2 == "Super Potion":
-            myhp += 50
-            print(currentkeyword + " gained 50 HP")
-            print(currentkeyword + " has " + str(myhp) + "HP now")
+            if totalcoins >= 100:
+                totalcoins -= 100
+                myhp += 50
+                print(currentkeyword + " gained 50 HP")
+                print(currentkeyword + " has " + str(myhp) + "HP now")
+                print("You have " + str(tatalcoins) + " now.")
+                darshanmove()
+            else:
+                print("Not enough coins")
             continue
         elif action2 in bag and action2 == "Hyper Potion":
-            myhp += 100
-            print(currentkeyword + " gained 100 HP")
-            print(currentkeyword + " has " + str(myhp) + "HP now")
+            if totalcoins >= 350:
+                totalcoins -= 350
+                myhp += 100
+                print(currentkeyword + " gained 100 HP")
+                print(currentkeyword + " has " + str(myhp) + "HP now")
+                print("You have " + str(tatalcoins) + " now.")
+            else:
+                print("Not enough coins")
             continue
         else:
             print("invalid action")
