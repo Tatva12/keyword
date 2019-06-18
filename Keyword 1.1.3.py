@@ -149,13 +149,13 @@ def lipstick():
     global currentfoe, currentkeyword, foehitmultiplier, myhitmultiplier, dmgreceiver, dmgdealer
     print(dmgdealer + " used Lipstick")
     print(dmgreceiver + " fell in love with " + dmgdealer)
-    if dmgreceiver == currentfoe:
+    if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
         if foehitmultiplier <= 0.5:
             print(dmgdealer + "'s hitmultiplier is already low")
         elif foehitmultiplier > 0.5:
             print(currentfoe + "'s hitmultiplier fell harshly")
             foehitmultiplier -= 0.3
-    elif dmgreceiver == currentkeyword:
+    elif dmgreceiver == currentkeyword or dmgdealer == currentfoe:
         if myhitmultiplier <= 0.5:
             print(dmgreceiver + "'s hitmultiplier is already low")
         else:
@@ -176,16 +176,16 @@ def pokemon():
 
     if x in chance:
         print(dmgreceiver + " jumped off the roof. He couldn't take it anymore...")
-        if dmgreceiver == currentfoe:
+        if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
             foehp = 0
-        elif dmgreceiver == currentkeyword:
+        elif dmgreceiver == currentkeyword or dmgdealer == currentfoe:
             myhp = 0
     else:
         print(dmgreceiver + " decided not today! I'll kick this retard's ***!")
         print(dmgreceiver + "'s hitmultiplier rose harshly!")
-        if dmgreceiver == currentfoe:
+        if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
             foehitmultiplier += 0.3
-        elif dmgreceiver == currentkeyword:
+        elif dmgreceiver == currentkeyword or dmgdealer == currentfoe:
             myhitmultiplier += 0.3
 
 
@@ -274,30 +274,35 @@ while myhp > 0 and foehp > 0:
             currentkeyword = mykeywords[0]
             mycurrentmoveset = tatvamoveset
             dmgdealer = currentkeyword
+            dmgreceiver = currentfoe
             continue
         elif action2 == mykeywords[1]:
             print("You sent out " + mykeywords[1])
             currentkeyword = mykeywords[1]
             mycurrentmoveset = varunmoveset
             dmgdealer = currentkeyword
+            dmgreceiver = currentfoe
             continue
         elif action2 == mykeywords[2]:
             print("You sent out " + mykeywords[2])
             mycurrentmoveset = rushilmoveset
             currentkeyword = mykeywords[2]
             dmgdealer = currentkeyword
+            dmgreceiver = currentfoe
             continue
         elif action2 == mykeywords[3]:
             print("You sent out " + mykeywords[3])
             currentkeyword = mykeywords[3]
             mycurrentmoveset = rithikmoveset
             dmgdealer = currentkeyword
+            dmgreceiver = currentfoe
             continue
         elif action2 == mykeywords[4]:
             print("You sent out " + mykeywords[4])
             currentkeyword = mykeywords[4]
             mycurrentmoveset = darshanmoveset
             dmgdealer = currentkeyword
+            dmgreceiver = currentfoe
             continue
     elif action1 == menuactions[2]:  # Fight
         print(*mycurrentmoveset, sep="\n")
@@ -314,11 +319,13 @@ while myhp > 0 and foehp > 0:
             continue
         elif action2 in mycurrentmoveset and action2 == "Lipstick":
             dmgdealer = currentkeyword
+            dmgreceiver = currentfoe
             lipstick()
             foemove()
             continue
         elif action2 in mycurrentmoveset and action2 == "Pokemon":
             dmgdealer = currentkeyword
+            dmgreceiver = currentfoe
             pokemon()
             if foehp == 0:
                 continue
