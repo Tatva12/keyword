@@ -7,6 +7,8 @@ currentkeyword = "Rohit"
 menuactions = ["use item", "swap keyword", "fight", "run"]
 bag = ["Potion 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
 mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan", "Rohit"]
+bag = ["Potion - 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
+mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan"]
 run = [99, 34, 56, 83, 12, 25, 8, 6]
 foehp = 100
 myhp = 100
@@ -33,7 +35,7 @@ gainedcoins = random.randrange(45, 100, 5)
 
 
 def rap():
-    global rapd, currentkeyword, foehp, myhp, myhitmultiplier, foehitmultiplier, mydefmultiplier, foedefmultiplier, currentfoe
+    global rapd, currentkeyword, foehp, myhp, myhitmultiplier, foehitmultiplier, mydefmultiplier, foedefmultiplier, currentfoe, dmgdealer, dmgreceiver
     if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
         rapd = random.randint(22, 35) * myhitmultiplier * foedefmultiplier
         foehp -= int(rapd)
@@ -45,7 +47,7 @@ def rap():
 
 
 def gk():
-    global gkd, currentkeyword, currentfoe, foehp, myhp, myhitmultiplier, foedeftmultiplier, foehitmultiplier, mydefmultiplier
+    global gkd, currentkeyword, currentfoe, foehp, myhp, myhitmultiplier, foedeftmultiplier, foehitmultiplier, mydefmultiplier, dmgdealer, dmgreceiver
     if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
         gkd = random.randint(15, 25) * myhitmultiplier * foedefmultiplier
         foehp -= gkd
@@ -57,7 +59,7 @@ def gk():
 
 
 def bite():
-    global bited, currentkeyword, currentfoe, myhp, foehp, foehitmultiplier, mydefmultiplier, myhitmultiplier, foedefmultiplier
+    global bited, currentkeyword, currentfoe, myhp, foehp, foehitmultiplier, mydefmultiplier, myhitmultiplier, foedefmultiplier, dmgdealer, dmgreceiver
     if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
         bited = random.randint(20, 25) * foehitmultiplier * mydefmultiplier
         myhp -= bited
@@ -69,11 +71,11 @@ def bite():
 
 
 def football():
-    global currentkeyword, currentfoe, footballd, myhp, foehp, foehitmultiplier, foedefmultiplier, mydefmultiplier, myhitmultiplier
+    global currentkeyword, currentfoe, footballd, myhp, foehp, foehitmultiplier, foedefmultiplier, mydefmultiplier, myhitmultiplier, dmgreceiver, dmgdealer
     footballd = random.randint(30, 40)
     chance = [1]
     print(dmgdealer + " used Football!")
-    print(dmgreceiver + " started playibg football with " + dmgdealer)
+    print(dmgreceiver + " started playing football with " + dmgdealer)
     if dmgreceiver == currentkeyword or dmgdealer == currentfoe:
         if x in chance:
             print(dmgreceiver + " fell down and hurt himself ")
@@ -110,17 +112,24 @@ def football():
 
 def stare():
     global stared, currentkeyword, myhitmultiplier
-    print(currentfoe + " used Stare")
-    print(currentkeyword + " is feeling awkward")
-    if myhitmultiplier <= 0.5:
-        print(currentkeyword + "'s hitmultiplier is already low")
-    else:
-        print(currentkeyword + "'s hitmultiplier fell")
-        myhitmultiplier -= 0.1
+    print(dmgdealer + " used Stare")
+    print(dmgreceiver + " is feeling awkward")
+    if dmgreceiver == currentkeyword or dmgdealer == currentfoe:
+        if myhitmultiplier <= 0.5:
+            print(dmgreceiver + "'s hitmultiplier is already low")
+        else:
+            print(dmgreceiver + "'s hitmultiplier fell")
+            myhitmultiplier -= 0.1
+    elif dmgreceiver == currentfoe or dmgdealer == currentkeyword:
+        if foehitmultiplier <= 0.5:
+            print(dmgreceiver + "'s hitmultiplier is already low")
+        else:
+            print(dmgreceiver + "'s hitmultiplier fell")
+            foehitmultiplier -= 0.1
 
 
 def pj():
-    global pjd, myhp, foehp, bangd, mycurrentmoveset, dmgdealer, dmgreceiver, currentkeyword, currentkeyword
+    global pjd, myhp, foehp, bangd, mycurrentmoveset, dmgdealer, dmgreceiver, currentkeyword, currentkeyword, dmgreceiver, dmgdealer
     print(dmgdealer + " used PJ.")
     print(dmgreceiver + " hates his life.")
     print(dmgreceiver + " feels like banging his head on the wall!")
@@ -155,7 +164,7 @@ def lipstick():
 
 
 def pokemon():
-    global currentkeyword, currentfoe, foehitmultiplier, myhitmultiplier, foehp, myhp, x
+    global currentkeyword, currentfoe, foehitmultiplier, myhitmultiplier, foehp, myhp, x, dmgdealer, dmgreceiver
     print(dmgdealer + " used Pokemon")
     print(dmgreceiver + " started playing Pokemon with " + dmgdealer)
     print(dmgreceiver + " died in a gym battle in Pokemon.")
@@ -172,7 +181,7 @@ def pokemon():
         elif dmgreceiver == currentkeyword:
             myhp = 0
     else:
-        print(dmgreceiver + " decided not today! I'll kill this retard's ***!")
+        print(dmgreceiver + " decided not today! I'll kick this retard's ***!")
         print(dmgreceiver + "'s hitmultiplier rose harshly!")
         if dmgreceiver == currentfoe:
             foehitmultiplier += 0.3
@@ -181,9 +190,10 @@ def pokemon():
 
 
 def foemove():
-    global randmove, foecurrentmoveset, currentfoe, dmgdealer
+    global randmove, foecurrentmoveset, currentfoe, dmgdealer, dmgreceiver
     randmove = random.choice(foecurrentmoveset)
     dmgdealer = currentfoe
+    dmgreceiver = currentkeyword
     if randmove == "Bite":
         bite()
     elif randmove == "Football":
@@ -219,40 +229,38 @@ while myhp > 0 and foehp > 0:
         print(*bag, sep="\n")
         action2 = input("What do you want to use?\n")
 
-        if action2 in bag and action2 == "Potion":
+        if action2 == "Potion":
             if totalcoins >= 50:
                 totalcoins -= 50
                 myhp += 20
                 print(currentkeyword + " gained 20 HP")
                 print(currentkeyword + " has " + str(myhp) + "HP now")
-                print("You have " + str(tatalcoins) + " now.")
+                print("You have " + str(totalcoins) + " coins now.")
                 foemove()
             else:
                 print("Not enough coins!")
             continue
-        elif action2 in bag and action2 == "Super Potion":
+        elif action2 == "Super Potion":
             if totalcoins >= 100:
                 totalcoins -= 100
                 myhp += 50
                 print(currentkeyword + " gained 50 HP")
                 print(currentkeyword + " has " + str(myhp) + "HP now")
-                print("You have " + str(tatalcoins) + " now.")
+                print("You have " + str(totalcoins) + " coins now.")
                 foemove()
-            else:
-                print("Not enough coins")
-            continue
-        elif action2 in bag and action2 == "Hyper Potion":
+        elif action2 == "Hyper Potion":
             if totalcoins >= 350:
                 totalcoins -= 350
                 myhp += 100
                 print(currentkeyword + " gained 100 HP")
                 print(currentkeyword + " has " + str(myhp) + "HP now")
-                print("You have " + str(tatalcoins) + " now.")
+                print("You have " + str(totalcoins) + " coins now.")
+                foemove()
             else:
                 print("Not enough coins")
             continue
         else:
-            print("invalid action")
+            print("Invalid action")
             continue
         break
     elif action1 == menuactions[1]:  # Swap Keyword
