@@ -34,10 +34,10 @@ gainedcoins = random.randrange(45, 100, 5)
 
 def rap():
     global rapd, currentkeyword, foehp, myhp, myhitmultiplier, foehitmultiplier, mydefmultiplier, foedefmultiplier, currentfoe
-    if dmgreceiver == currentfoe:
+    if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
         rapd = random.randint(22, 35) * myhitmultiplier * foedefmultiplier
         foehp -= int(rapd)
-    elif dmgreceiver == currentkeyword:
+    elif dmgreceiver == currentkeyword or dmgdealer == currentfoe:
         rapd = random.randint(22, 35) * foehitmultiplier * mydefmultiplier
         myhp -= int(rapd)
     print(dmgdealer + " used Rap")
@@ -46,10 +46,10 @@ def rap():
 
 def gk():
     global gkd, currentkeyword, currentfoe, foehp, myhp, myhitmultiplier, foedeftmultiplier, foehitmultiplier, mydefmultiplier
-    if dmgreceiver == currentfoe:
+    if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
         gkd = random.randint(15, 25) * myhitmultiplier * foedefmultiplier
         foehp -= gkd
-    elif dmgreceiver == currentkeyword:
+    elif dmgreceiver == currentkeyword or dmgdealer == currentfoe:
         gkd = random.randint(15, 25) * mydefmultiplier * foehitmultiplier
         myhp -= gkd
     print(dmgdealer + " used GK")
@@ -58,39 +58,39 @@ def gk():
 
 def bite():
     global bited, currentkeyword, currentfoe, myhp, foehp, foehitmultiplier, mydefmultiplier, myhitmultiplier, foedefmultiplier
-    if dmgreceiver == currentfoe:
+    if dmgreceiver == currentfoe or dmgdealer == currentkeyword:
         bited = random.randint(20, 25) * foehitmultiplier * mydefmultiplier
         myhp -= bited
-    elif dmgreceiver == currentkeyword:
+    elif dmgreceiver == currentkeyword or dmgdealer == currentfoe:
         bited = random.randint(20, 25) * myhitmultiplier * foedefmultiplier
         foehp -= bited
     print(dmgdealer + " used Bite")
     print("It did " + str(bited) + " damage")
 
 
-def football():  # GO THROUGH MIGHT BE SOME LOGICAL ERROR
+def football():
     global currentkeyword, currentfoe, footballd, myhp, foehp, foehitmultiplier, foedefmultiplier, mydefmultiplier, myhitmultiplier
     footballd = random.randint(30, 40)
     chance = [1]
     print(dmgdealer + " used Football!")
     print(dmgreceiver + " started playibg football with " + dmgdealer)
-    if dmgreceiver == currentkeyword:
+    if dmgreceiver == currentkeyword or dmgdealer == currentfoe:
         if x in chance:
-            print(currentkeyword + " fell down and hurt himself ")
-            print(currentkeyword + " lost " + str(footballd) + " HP!")
+            print(dmgreceiver + " fell down and hurt himself ")
+            print(dmgreceiver + " lost " + str(footballd) + " HP!")
             myhp -= footballd
         else:
             print("Both of them got tired...")
-            print(currentfoe + "'s and " + currentkeyword + "'s defense fell")
+            print(dmgdealer + "'s and " + dmgreceiver + "'s defense fell")
             if foedefmultiplier <= 0.5:
-                print(currentfoe + "'s defense is already low")
+                print(dmgdealer + "'s defense is already low")
             else:
                 foedefmultiplier -= 0.1
             if mydefmultiplier <= 0.5:
-                print(currentkeyword + "'s defense is already low")
+                print(dmgreceiver + "'s defense is already low")
             else:
                 mydefmultiplier -= 0.1
-    elif dmgreceiver == currentfoe:
+    elif dmgreceiver == currentfoe or dmgdealer == currentkeyword:
         if x in chance:
             print(dmgreceiver + " fell down and hurt himself ")
             print(dmgreceiver + " lost " + str(footballd) + " HP!")
@@ -102,10 +102,10 @@ def football():  # GO THROUGH MIGHT BE SOME LOGICAL ERROR
                 print(dmgreceiver + "'s defense is already low")
             else:
                 foedefmultiplier -= 0.1
-            if foedefmultiplier <= 0.5:
-                print(dmgreceiver + "'s defense is already low")
+            if mydefmultiplier <= 0.5:
+                print(dmgdealer + "'s defense is already low")
             else:
-                foedefmultiplier -= 0.1
+                mydefmultiplier -= 0.1
 
 
 def stare():
@@ -181,7 +181,7 @@ def pokemon():
 
 
 def foemove():
-    global randmove, foecurrentmoveset, currentfoe
+    global randmove, foecurrentmoveset, currentfoe, dmgdealer
     randmove = random.choice(foecurrentmoveset)
     dmgdealer = currentfoe
     if randmove == "Bite":
@@ -295,23 +295,25 @@ while myhp > 0 and foehp > 0:
         print(*mycurrentmoveset, sep="\n")
         action2 = input("Which move do you want to use?\n")
         if action2 in mycurrentmoveset and action2 == "Rap":
+            dmgdealer = currentkeyword
             rap()
             foemove()
             continue
         elif action2 in mycurrentmoveset and action2 == "GK":
+            dmgdealer = currentkeyword
             gk()
             foemove()
             continue
         elif action2 in mycurrentmoveset and action2 == "Lipstick":
+            dmgdealer = currentkeyword
             lipstick()
             foemove()
             continue
         elif action2 in mycurrentmoveset and action2 == "Pokemon":
+            dmgdealer = currentkeyword
             pokemon()
             if foehp == 0:
                 continue
-        elif action2 in mycurrentmoveset and action2 == "PJ":
-            pj()
             foemove()
             continue
         else:
