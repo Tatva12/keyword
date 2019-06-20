@@ -7,8 +7,7 @@ currentkeyword = "Rohit"
 menuactions = ["use item", "swap keyword", "fight", "run"]
 bag = ["Potion 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
 mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan", "Rohit"]
-bag = ["Potion - 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
-mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan"]
+
 run = [99, 34, 56, 83, 12, 25, 8, 6]
 foehp = 100
 myhp = 100
