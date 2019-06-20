@@ -1,8 +1,8 @@
 import random
 
 # Variables
-
-currentfoe = "Darshan"
+keywords = ["Rohit", "Darshan"]
+currentfoe = random.choice(keywords)
 currentkeyword = "Rohit"
 menuactions = ["use item", "swap keyword", "fight", "run"]
 bag = ["Potion 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
@@ -16,18 +16,18 @@ foehitmultiplier = 1
 myhitmultiplier = 1
 foedefmultiplier = 1
 mydefmultiplier = 1
-rapd = 0
-gkd = 0
-bited = 0
-footballd = 0
-stard = 0
-pjd = 0
-bangd = 0
+rapd = None
+gkd = None
+bited = None
+footballd = None
+stard = None
+pjd = None
+bangd = None
 x = 0
 steps = 0
-dmgdealer = currentkeyword
-dmgreceiver = currentfoe
 totalcoins = 1000
+dmgreceiver = None
+dmgdealer = None
 lostcoins = random.randrange(45, 90, 5)
 gainedcoins = random.randrange(45, 100, 5)
 
@@ -111,7 +111,7 @@ def football():
 
 
 def stare():
-    global stared, currentkeyword, myhitmultiplier
+    global stared, currentkeyword, myhitmultiplier, foehitmultiplier
     print(dmgdealer + " used Stare")
     print(dmgreceiver + " is feeling awkward")
     if dmgreceiver == currentkeyword or dmgdealer == currentfoe:
@@ -190,18 +190,41 @@ def pokemon():
 
 
 def foemove():
-    global randmove, foecurrentmoveset, currentfoe, dmgdealer, dmgreceiver
+    global randmove, foecurrentmoveset, currentfoe, currentkeyword
     randmove = random.choice(foecurrentmoveset)
-    dmgdealer = currentfoe
-    dmgreceiver = currentkeyword
     if randmove == "Bite":
+        global dmgreceiver, dmgdealer
+        dmgreceiver = currentkeyword
+        dmgdealer = currentfoe
         bite()
     elif randmove == "Football":
+        dmgreceiver = currentkeyword
+        dmgdealer = currentfoe
         football()
     elif randmove == "Stare":
+        dmgreceiver = currentkeyword
+        dmgdealer = currentfoe
         stare()
     elif randmove == "PJ":
+        dmgreceiver = currentkeyword
+        dmgdealer = currentfoe
         pj()
+    elif randmove == "Rap":
+        dmgreceiver = currentkeyword
+        dmgdealer = currentfoe
+        rap()
+    elif randmove == "GK":
+        dmgreceiver = currentkeyword
+        dmgdealer = currentfoe
+        gk()
+    elif randmove == "Lipstick":
+        dmgreceiver = currentkeyword
+        dmgdealer = currentfoe
+        lipstick()
+    elif randmove == "Pokemon":
+        dmgreceiver = currentkeyword
+        dmgdealer = currentfoe
+        pokemon()
 
 
 # Movesets
@@ -212,11 +235,15 @@ varunmoveset = []
 rithikmoveset = []
 rushilmoveset = []
 
+if currentfoe == "Darshan":
+    foecurrentmoveset = darshanmoveset
+elif currentfoe == "Rohit":
+    foecurrentmoveset = rohitmoveset
+
 
 print("A wild " + currentfoe + " appeared")
 print("You sent " + currentkeyword + "!")
 mycurrentmoveset = rohitmoveset
-foecurrentmoveset = darshanmoveset
 
 while myhp > 0 and foehp > 0:
     steps += 1
@@ -310,17 +337,23 @@ while myhp > 0 and foehp > 0:
         if action2 in mycurrentmoveset and action2 == "Rap":
             dmgdealer = currentkeyword
             rap()
+            dmgdealer = currentfoe
+            dmgreceiver = currentkeyword
             foemove()
             continue
         elif action2 in mycurrentmoveset and action2 == "GK":
             dmgdealer = currentkeyword
             gk()
+            dmgdealer = currentfoe
+            dmgreceiver = currentkeyword
             foemove()
             continue
         elif action2 in mycurrentmoveset and action2 == "Lipstick":
             dmgdealer = currentkeyword
             dmgreceiver = currentfoe
             lipstick()
+            dmgdealer = currentfoe
+            dmgreceiver = currentkeyword
             foemove()
             continue
         elif action2 in mycurrentmoveset and action2 == "Pokemon":
@@ -329,12 +362,10 @@ while myhp > 0 and foehp > 0:
             pokemon()
             if foehp == 0:
                 continue
+            dmgdealer = currentfoe
+            dmgreceiver = currentkeyword
             foemove()
             continue
-        else:
-            foemove()
-            continue
-        continue
     elif action1 == menuactions[3]:  # Run
         x = random.randrange(1, 101)
         if x in run:
