@@ -2,11 +2,12 @@ import random
 
 # Variables
 keywords = ["Rohit", "Darshan"]
+mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan", "Rohit"]
 currentfoe = random.choice(keywords)
-currentkeyword = "Rohit"
+currentkeyword = mykeywords[5]
 menuactions = ["use item", "swap keyword", "fight", "run"]
 bag = ["Potion - 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
-mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan", "Rohit"]
+
 
 run = [99, 34, 56, 83, 12, 25, 8, 6]
 foehp = 100
