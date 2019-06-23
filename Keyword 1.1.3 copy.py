@@ -1,14 +1,15 @@
 import random
 
 # Variables
-keywords = ["Rohit", "Darshan"]
+keywords = ["Xubat", "Hurkrow"]
 currentfoe = random.choice(keywords)
-currentkeyword = "Rohit"
+currentkeyword = "Xubat"
 menuactions = ["use item", "swap keyword", "fight", "run"]
 bag = ["Potion 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
-mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan", "Rohit"]
+mykeywords = ["Biratina", "BigBagoon",
+              "Goltorb", "Rikachu", "Hurkrow", "Xubat"]
 bag = ["Potion - 50 coins", "Super Potion - 100 coins", "Hyper Potion - 500 coins"]
-mykeywords = ["Tatva", "Varun", "Rushil", "Rithik", "Darshan"]
+mykeywords = ["Biratina", "BigBagoon", "Goltorb", "Rikachu", "Hurkrow"]
 run = [99, 34, 56, 83, 12, 25, 8, 6]
 foehp = 100
 myhp = 100
@@ -228,22 +229,22 @@ def foemove():
 
 
 # Movesets
-rohitmoveset = ["Rap", "GK", "Lipstick", "Pokemon"]
-darshanmoveset = ["Bite", "Football", "Stare", "PJ"]
-tatvamoveset = ["Smile"]
-varunmoveset = []
-rithikmoveset = []
-rushilmoveset = []
+Xubatmoveset = ["Rap", "GK", "Lipstick", "Pokemon"]
+Hurkrowmoveset = ["Bite", "Football", "Stare", "PJ"]
+Biratinamoveset = ["Smile"]
+BigBagoonmoveset = []
+Rikachumoveset = []
+Goltorbmoveset = []
 
-if currentfoe == "Darshan":
-    foecurrentmoveset = darshanmoveset
-elif currentfoe == "Rohit":
-    foecurrentmoveset = rohitmoveset
+if currentfoe == "Hurkrow":
+    foecurrentmoveset = Hurkrowmoveset
+elif currentfoe == "Xubat":
+    foecurrentmoveset = Xubatmoveset
 
 
 print("A wild " + currentfoe + " appeared")
 print("You sent " + currentkeyword + "!")
-mycurrentmoveset = rohitmoveset
+mycurrentmoveset = Xubatmoveset
 
 while myhp > 0 and foehp > 0:
     steps += 1
@@ -299,20 +300,20 @@ while myhp > 0 and foehp > 0:
         elif action2 == mykeywords[0]:
             print("You sent out " + mykeywords[0])
             currentkeyword = mykeywords[0]
-            mycurrentmoveset = tatvamoveset
+            mycurrentmoveset = Biratinamoveset
             dmgdealer = currentkeyword
             dmgreceiver = currentfoe
             continue
         elif action2 == mykeywords[1]:
             print("You sent out " + mykeywords[1])
             currentkeyword = mykeywords[1]
-            mycurrentmoveset = varunmoveset
+            mycurrentmoveset = BigBagoonmoveset
             dmgdealer = currentkeyword
             dmgreceiver = currentfoe
             continue
         elif action2 == mykeywords[2]:
             print("You sent out " + mykeywords[2])
-            mycurrentmoveset = rushilmoveset
+            mycurrentmoveset = Goltorbmoveset
             currentkeyword = mykeywords[2]
             dmgdealer = currentkeyword
             dmgreceiver = currentfoe
@@ -320,14 +321,14 @@ while myhp > 0 and foehp > 0:
         elif action2 == mykeywords[3]:
             print("You sent out " + mykeywords[3])
             currentkeyword = mykeywords[3]
-            mycurrentmoveset = rithikmoveset
+            mycurrentmoveset = Rikachumoveset
             dmgdealer = currentkeyword
             dmgreceiver = currentfoe
             continue
         elif action2 == mykeywords[4]:
             print("You sent out " + mykeywords[4])
             currentkeyword = mykeywords[4]
-            mycurrentmoveset = darshanmoveset
+            mycurrentmoveset = Hurkrowmoveset
             dmgdealer = currentkeyword
             dmgreceiver = currentfoe
             continue
@@ -401,4 +402,4 @@ elif foehp <= 0:
         print("Current coin balance = " + str(totalcoins))
 
 
-# Tatva
+# Biratina
