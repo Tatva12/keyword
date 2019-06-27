@@ -1,0 +1,36 @@
+
+Right now, the program can successfully:
+
+    1) Perform moves:
+        a)Rap
+        b)GK
+        c)Bite
+        d)Football
+        e)Stare
+        f)PJ
+        g)Lipstick
+        h)Pokemon
+    2) Opponent move is selected randomly from the given opponent's moveset.
+    3)Swapping keywords is working
+    4)Coins awarded on winning battle and vice versa
+    5)Extra coins awarded on winning battle within 3 rounds and vice versa
+    6)3 types of potions exist, each costing different amounts of coins
+    7)You can currently run away from battle with an 8/100 probability of failing
+    8)Both Keywords start with an HP of 100
+
+Things left:
+
+    1)Experience points system
+    2)Printing menuactions available
+    3)Adding more usable items
+    4)Completing remaining Movesets
+    5)Evolution System
+    6)Adding more moves that unlock later
+    7)More advanced status effects (eg: Ice, Fire, etc.)
+
+Issues:
+
+    1)When Opponent is randomly selected as the same keyword being used by the player,
+    damage done by moves used by either keyword always deal damage to foe.
+    2)HP, damage dealt are floats which need to be displayed as rounded-off non-decimal numbers.
+
