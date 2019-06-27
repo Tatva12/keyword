@@ -1,0 +1,13 @@
+Log:
+
+    1) All three ptions...not working with 1 bug(s) found
+    2) Random wild opponent...working
+    3) While Loop had an error fixed that...working
+    4) Running away from battle 90/100 times successfully...working
+    5) Swap Keywords...working with 1 bug(s) found
+Issues:
+
+    1) Program runs twice for some reason if no wild keyword appears
+    or if you successfully run away...
+    2) If you swap Keyword to Darshan and use a potion, HP is still added into Rohit's name...
+    3) Once upon a time...when user used a option, it worked meaning logic was correct. Suddenly, After adding the swap keyword feature, it says function potion is not defined.
