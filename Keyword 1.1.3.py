@@ -250,6 +250,7 @@ while myhp > 0 and foehp > 0:
     print(currentfoe + "'s HP = " + str(foehp))
     print(currentkeyword + "'s HP = " + str(myhp))
 
+    print(*menuactions, sep = "\n")
     action1 = input("What would you like to do?\n")
     if action1 == menuactions[0]:    # Use Item
         print("Items in bag")
