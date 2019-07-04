@@ -1,6 +1,5 @@
 from keywords import *
 from main import currentkeyword
-
 # Declaring HPs
 
 if currentkeyword == "Rohit":
