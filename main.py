@@ -29,6 +29,7 @@ def wildbattle():
         foerohit()
     print("A wild " + currentfoe + " appeared!")
     print(trainer + " sent out Rohit!")
+    myrohit()
     while currentkeywordhp > 0 and currentfoehp > 0:
         print(*menuactions, sep="/")
         action1 = input("What would you like to do?\n")
@@ -78,13 +79,19 @@ def wildbattle():
 
 
 def main():
-    print(trainer + " walked into grass in search of wild keywords...")
-    x = random.randrange(1, 10)
-    wildprob = [1, 3, 4, 7]
-    if x in wildprob:
-        wildbattle()
-    else:
-        print("No keyword appeared...Try again!")
+    while True:
+        print(trainer + " walked into grass in search of wild keywords...")
+        x = random.randrange(1, 10)
+        wildprob = [1, 3, 4, 7]
+        if x in wildprob:
+            wildbattle()
+        else:
+            ta = input(
+                "No keyword appeared...Type 1 to try again and 2 to give up...")
+            if ta == 1:
+                continue
+            elif ta == 2:
+                break
 
 
 # Calling Main Function
