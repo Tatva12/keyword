@@ -3,15 +3,14 @@
 # Importing Stuff and setting certain defaults
 
 import random
-from Lists import *
+from poklists import *
 from keywords import *
-from Items import *
+from pokitems import *
 
 # Asking for general details
 
-
 trainer = input("What would you like to call your trainer?\n")
-
+currentkeywordhp = 100
 
 # Defining Wild Battle
 
@@ -20,12 +19,14 @@ def wildbattle():
     global currentfoehp, currentkeywordhp, currentfoe, currentkeyword
     currentfoe = random.choice(keywords)
     if currentfoe == "Darshan":
-        foedarshan()
+        foedarshan(1)
     elif currentfoe == "Rohit":
-        foerohit()
+        foerohit(1)
     print("A wild " + currentfoe + " appeared!")
+
     print(trainer + " sent out Rohit!")
-    myrohit()
+    var = myrohit(1)
+    print(var)
     while currentkeywordhp > 0 and currentfoehp > 0:
         print(*menuactions, sep="/")
         action1 = input("What would you like to do?\n")
@@ -85,10 +86,10 @@ def main():
             wildbattle()
         else:
             ta = input(
-                "No keyword appeared...Type 1 to try again and 2 to give up...")
-            if ta == 1:
+                "No keyword appeared...Type 1 to try again and 2 to give up...\n")
+            if ta == "1":
                 continue
-            elif ta == 2:
+            elif ta == "2":
                 break
 
     print("Nowhere to go, you go back to where you came from...")
