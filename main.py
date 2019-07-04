@@ -2,13 +2,9 @@
 
 # Importing Stuff and setting certain defaults
 
-
 import random
 from Lists import *
 from keywords import *
-
-myrohit()
-
 from Items import *
 
 # Asking for general details
@@ -80,6 +76,8 @@ def wildbattle():
 
 def main():
     while True:
+        global trainer
+
         print(trainer + " walked into grass in search of wild keywords...")
         x = random.randrange(1, 10)
         wildprob = [1, 3, 4, 7]
@@ -92,6 +90,12 @@ def main():
                 continue
             elif ta == 2:
                 break
+
+    print("Nowhere to go, you go back to where you came from...")
+    print("No I'm not talking about your Dad's testicle.")
+    print("You went back home and slept.")
+    print("Next morning you didnt wake up...")
+    print("...on time. You woke up late...")
 
 
 # Calling Main Function

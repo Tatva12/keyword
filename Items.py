@@ -1,4 +1,12 @@
-from main import currentkeyword, currentkeywordhp
+from keywords import *
+from main import currentkeyword
+
+# Declaring HPs
+
+if currentkeyword == "Rohit":
+    myrohit()
+elif currentkeyword == "Darshan":
+    mydarshan()
 
 # Default initial items
 
