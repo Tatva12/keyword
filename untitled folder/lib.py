@@ -6,6 +6,7 @@ import random
 def myrohit(myrohitlv):
     global currentkeywordhp, currentmoveset, currentkeyword
     currentkeywordhp = 139 + (myrohitlv * 7)
+    print("Rohit's HP = " + str(currentkeywordhp))
     currentmoveset = ["Rap", "GK", "Lipstick", "Pokemon"]
     currentkeyword = "Rohit"
     return currentkeywordhp
@@ -14,6 +15,7 @@ def myrohit(myrohitlv):
 def mydarshan(mydarshanlv):
     global currentkeywordhp, currentmoveset, currentkeyword
     currentkeywordhp = 130 + (mydarshanlv * 7)
+    print("Darshan's HP = " + str(currentkeywordhp))
     currentmoveset = ["Football", "PJ", "Stare", "Bite"]
     currentkeyword = "Darshan"
 
@@ -23,6 +25,7 @@ def mydarshan(mydarshanlv):
 def foerohit(foerohitlv):
     global currentfoehp, foemoveset, currentfoe
     currentfoehp = 141 + (foerohitlv * 8)
+    print("Foe Rohit's HP = " + str(currentfoehp))
     foemoveset = ["Rap", "GK", "Lipstick", "Pokemon"]
     currentfoe = "Rohit"
 
@@ -30,6 +33,7 @@ def foerohit(foerohitlv):
 def foedarshan(foedarshanlv):
     global currentfoehp, foemoveset, currentfoe
     currentfoehp = 183 + (foedarshanlv * 8)
+    print("Foe Darshan's HP = " + str(currentfoehp))
     foemoveset = ["Football", "PJ", "Stare", "Bite"]
     currentfoe = "Darshan"
 
@@ -59,7 +63,7 @@ def potion():
     if potions >= 1:
         print(currentkeyword + " used a Potion. It gained 20 HP!")
         currentkeywordhp += 20
-        print(currentkeyword + "has " + str(currentkeywordhp) + " now!")
+        print(currentkeyword + " has " + str(currentkeywordhp) + "HP now!")
         potions -= 1
     else:
         print("No Potions Left")
@@ -70,7 +74,7 @@ def superpotion():
     if superpotions >= 1:
         print(currentkeyword + " used a Super Potion. It gained 50 HP!")
         currentkeywordhp += 50
-        print(currentkeyword + "has " + str(currentkeywordhp) + " now!")
+        print(currentkeyword + " has " + str(currentkeywordhp) + "HP now!")
         superpotions -= 1
     else:
         print("No Super Potions Left")
@@ -81,7 +85,7 @@ def hyperpotion():
     if hyperpotions >= 1:
         print(currentkeyword + " used a Hyper Potion. It gained 150 HP!")
         currentkeywordhp += 150
-        print(currentkeyword + "has " + str(currentkeywordhp) + " now!")
+        print(currentkeyword + " has " + str(currentkeywordhp) + "HP now!")
         hyperpotions -= 1
     else:
         print("No Hyper Potions Left")
@@ -92,17 +96,17 @@ def hyperpotion():
 def grass():
     f = 1
     while f == 1:
-        print("You walk in grass...")
+        print("You start walking in grass...")
         x = random.randrange(1, 10)
         if x in wildprob:
             wildbattle()
             f += 1
         else:
             tryagain = input(
-                "No keyword appeared...Type 1 to try again and 2 to give up...\n")
-            if tryagain == "1":
+                "You see something far away over there in the grass...\n[go/dont go]\n")
+            if tryagain == "go":
                 continue
-            elif tryagain == "2":
+            elif tryagain == "dont go":
                 break
 
 
@@ -114,9 +118,13 @@ def wildbattle():
         foedarshan(1)
     elif currentfoe == "Rohit":
         foerohit(2)
-
-    myrohit(1)
+    currentkeyword = "Rohit"
     print("You sent out " + currentkeyword + "!")
+    myrohit(1)
+    if currentkeywordhp == 0:
+        print(currentkeyword + " has no HP.")
+        print("You sent out Darshan")
+        mydarshan(1)
     while currentkeywordhp > 0 and currentfoehp > 0:
         action3 = input(
             "What would you like to do?\nfight/swap keyword/use item/run\n")
@@ -141,3 +149,23 @@ def wildbattle():
             else:
                 print("You successfully ran away...")
                 break
+
+        elif action3 == "swap keyword":
+            print("Keywords available:")
+            print(*mykeywords, sep="/")
+            action4 = input("Which keyword do you choose?\n")
+
+            if action4 == currentkeyword:
+                print(currentkeyword + " is already in battle.")
+                continue
+            elif action4 == "Rohit":
+                print("You sent out Rohit!")
+                myrohit(1)
+                continue
+            elif action4 == "Darshan":
+                print("You sent out Darshan!")
+                mydarshan(1)
+                continue
+        elif action3 == "fight":
+            print("Worked")
+            continue
