@@ -49,7 +49,7 @@ choices2 = ["run", "stay"]
 
 wildprob = [1, 2, 5, 6, 9]
 runprob = [1, 11, 22, 33, 44, 55, 66, 77, 88, 99]
-
+suicidechance = [2, 4]
 
 # Items
 
@@ -95,6 +95,7 @@ class items():
 rohitexp = 0
 darshanexp = 0
 expgain = random.randrange(100, 500)
+
 
 if rohitexp >= 0 and rohitexp <= 500:
     rohitlv = 1
@@ -142,7 +143,74 @@ elif darshanexp > 35000 and darshanexp <= 50000:
 elif darshanexp > 50000:
     darshanlvr = 10
 
-# Defining certain other functions.
+# MY MOVES
+
+
+class myMoves():
+    def gk():
+        print(currentkeyword + " used his general knowledge")
+        gkd = random.randrange(10, 25)
+        currentfoehp = currentfoehp - gkd
+        print("It did " + str(gkd) + " damage to " + currentfoe + "!")
+
+    def rap():
+        print(currentkeyword + " started Rapping.")
+        print("Kaun bola? Tujhse na ho paayega?")
+        print("...")
+        print("Mere jaisa shaana laala tujhko na mil paayega!")
+        print("...")
+        print("Ab hausle se jeetenge, kaamyaabi cheerenge, sabkuch mila paseene se,")
+        print("...")
+        print("KUKI APNA TIME AAYEGA!")
+
+        print(currentfoe + " started cheering.")
+        print(currentfoe + " has an idol now.")
+
+    def lipstick():
+        print(currentkeyword + " applied Lipstick")
+        print(currentfoe + " is in love with " + currentkeyword + " now!")
+
+    def pokemon():
+        print(currentkeyword + " used Pokemon")
+        print(currentfoe + " started playing Pokemon with " + currentkeyword)
+        print(currentfoe + " died in a gym battle in Pokemon.")
+        print(currentfoe + " hates his life.")
+        print(currentfoe + " feels like jumping off the roof.")
+
+        x = random.randint(1, 10)
+
+        if x in suicidechance:
+            print(currentfoe + " jumped off the roof. He couldn't take it anymore...")
+            currentfoehp = 0
+        else:
+            print(currentfoe + " decided not today! I'll kick this retard's ***!")
+            print(currentfoe + "'s hitmultiplier rose harshly!")
+
+
+# FOE MOVES
+
+
+class foeMoves():
+    def bite():
+        print(currentfoe + " bit " + currentkeyword)
+        print("Wondering where?")
+        print("HAHA. Youre lucky for now i havent added that feature to the game yet. Ill add it later.")
+        bited = random.randrange(25, 30)
+        print("It did " + str(bited) + " damage to " + currentkeyword)
+        currentfoehp = currentfoehp - bited
+
+    def pj():
+        print(currentfoe + " cracked a pakau joke.")
+        print(currentkeyword + " hates his life.")
+        print(currentkeyword + " feels like banging his head on the wall!")
+        print(currentkeyword + " learned Bang")
+        print(currentkeyword + " Banged his head on the wall")
+        print(currentkeyword + " forgot Bang")
+        bangd = random.randint(50, 75)
+        currentkeywordhp -= bangd
+        print(currentkeyword + " lost " + str(bangd) + " HP")
+
+    # Defining certain other functions.
 
 
 def grass():
@@ -174,11 +242,16 @@ def wildbattle():
     currentkeyword = "Rohit"
     print("You sent out " + currentkeyword + "!")
     my.myrohit(rohitlv)
+
     if currentkeywordhp == 0:
         print(currentkeyword + " has no HP.")
         print("You sent out Darshan")
         my.mydarshan(darshanlv)
+
     while currentkeywordhp > 0 and currentfoehp > 0:
+        print(currentkeyword + "'s HP = " + currentkeywordhp)
+        print(currentfoe + "'s HP = " + currentfoehp)
+
         action3 = input(
             "What would you like to do?\nfight/swap keyword/use item/run\n")
 
