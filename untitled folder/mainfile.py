@@ -58,5 +58,3 @@ while True:
     else:
         print("Invalid action. Try again.")
         continue
-
-print(".")
