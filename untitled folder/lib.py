@@ -6,16 +6,15 @@ import random
 class my():
     def myrohit(myrohitlv):
         global currentkeywordhp, currentmoveset, currentkeyword
+        currentkeyword = "Rohit"
         currentkeywordhp = 139 + (myrohitlv * 8)
         currentmoveset = ["Rap", "GK", "Lipstick", "Pokemon"]
-        currentkeyword = "Rohit"
-        return currentkeywordhp
 
     def mydarshan(mydarshanlv):
         global currentkeywordhp, currentmoveset, currentkeyword
+        currentkeyword = "Darshan"
         currentkeywordhp = 139 + (mydarshanlv * 11)
         currentmoveset = ["Football", "PJ", "Stare", "Bite"]
-        currentkeyword = "Darshan"
 
 
 class foe():
@@ -185,6 +184,45 @@ class myMoves():
             print(currentfoe + " decided not today! I'll kick this retard's ***!")
             print(currentfoe + "'s hitmultiplier rose harshly!")
 
+    def bite():
+        global currentfoehp
+        print(currentkeyword + " bit " + currentfoe)
+        print("Wondering where?")
+        print("HAHA. Youre lucky for now i havent added that feature to the game yet. Ill add it later.")
+        bited = random.randrange(25, 30)
+        print("It did " + str(bited) + " damage to " + currentfoe)
+        currentfoehp = currentfoehp - bited
+
+    def pj():
+        global currentfoehp
+        print(currentkeyword + " cracked a pakau joke.")
+        print(currentfoe + " hates his life.")
+        print(currentfoe + " feels like banging his head on the wall!")
+        print(currentfoe + " learned Bang")
+        print(currentfoe + " Banged his head on the wall")
+        print(currentfoe + " forgot Bang")
+        bangd = random.randint(50, 75)
+        currentfoehp -= bangd
+        print(currentfoe + " lost " + str(bangd) + " HP")
+
+    def football():
+        global currentfoehp
+        footballd = random.randint(30, 40)
+        x = random.randrange(1, 10)
+        print(currentkeyword + " used Football!")
+        print(currentfoe + " started playing football with " + currentfoe)
+        if x in fallprob:
+            print(currentfoe + " fell down and hurt himself ")
+            print(currentfoe + " lost " + str(footballd) + " HP!")
+            currentfoehp = currentfoe - footballd
+        else:
+            print("Both of them got tired...")
+            print(currentfoe + "'s and " + currentkeyword + "'s defense fell")
+
+    def stare():
+        print(currentkeyword + " used Stare")
+        print(currentfoe + " is feeling awkward")
+        print(currentfoe + "'s hitmultiplier fell")
 
 # FOE MOVES
 
@@ -229,6 +267,49 @@ class foeMoves():
         print(currentfoe + " used Stare")
         print(currentkeyword + " is feeling awkward")
         print(currentkeyword + "'s hitmultiplier fell")
+
+    def gk():
+        global currentkeywordhp
+        print(currentfoe + " used his general knowledge")
+        gkd = random.randrange(10, 25)
+        currentkeywordhp = currentkeywordhp - gkd
+        print("It did " + str(gkd) + " damage to " + currentfoe + "!")
+
+    def rap():
+        print(currentfoe + " started Rapping.")
+        print("Kaun bola? Tujhse na ho paayega?")
+        print("...")
+        print("Mere jaisa shaana laala tujhko na mil paayega!")
+        print("...")
+        print("Ab hausle se jeetenge, kaamyaabi cheerenge, sabkuch mila paseene se,")
+        print("...")
+        print("KUKI APNA TIME AAYEGA!")
+
+        print(currentkeyword + " started cheering.")
+        print(currentkeyword + " has an idol now.")
+
+    def lipstick():
+        print(currentfoe + " applied Lipstick")
+        print(currentkeyword + " is in love with " + currentfoe + " now!")
+
+    def pokemon():
+        global currentkekywordhp
+        print(currentfoe + " used Pokemon")
+        print(currentkeyword + " started playing Pokemon with " + currentkeyword)
+        print(currentkeyword + " died in a gym battle in Pokemon.")
+        print(currentkeyword + " hates his life.")
+        print(currentkeyword + " feels like jumping off the roof.")
+
+        x = random.randint(1, 10)
+
+        if x in suicidechance:
+            print(currentkeyword +
+                  " jumped off the roof. He couldn't take it anymore...")
+            currentkeywordhp = 0
+        else:
+            print(currentkeyword + " decided not today! I'll kick this retard's ***!")
+            print(currentkeyword + "'s hitmultiplier rose harshly!")
+
 # Defining certain other functions.
 
 
@@ -242,6 +323,14 @@ def randfoemove():
         foeMoves.bite()
     elif randmove == "Stare":
         foeMoves.stare()
+    elif randmove == "GK":
+        foeMoves.gk()
+    elif randmove == "Rap":
+        foeMoves.rap()
+    elif randmove == "Lipstick":
+        foeMoves.lipstick()
+    elif randmove == "Pokemon":
+        foeMoves.pokemon()
 
 
 def grass():
@@ -270,9 +359,8 @@ def wildbattle():
         foe.foedarshan(1)
     elif currentfoe == "Rohit":
         foe.foerohit(1)
-    currentkeyword = "Rohit"
-    print("You sent out " + currentkeyword + "!")
     my.myrohit(rohitlv)
+    print("You sent out " + currentkeyword + "!")
 
     if currentkeywordhp == 0:
         print(currentkeyword + " has no HP.")
@@ -342,11 +430,23 @@ def wildbattle():
             elif action4 in currentmoveset and action4 == "Pokemon":
                 myMoves.pokemon()
                 randfoemove()
+            elif action4 in currentmoveset and action4 == "Football":
+                myMoves.football()
+                randfoemove()
+            elif action4 in currentmoveset and action4 == "Bite":
+                myMoves.bite()
+                randfoemove()
+            elif action4 in currentmoveset and action4 == "Stare":
+                myMoves.stare()
+                randfoemove()
+            elif action4 in currentmoveset and action4 == "PJ":
+                myMoves.pj()
+                randfoemove()
             continue
 
     if currentkeywordhp == 0:
         print("You lost the battle.")
-        print("You gained no EXP`.")
+        print("You gained no EXP .")
 
     elif currentfoehp == 0:
         print("You won the battle.")
