@@ -7,7 +7,28 @@ foehitmultiplier = None
 mydefmultiplier = None
 myhitmultiplier = None
 
-# Defining Keywords
+# Trainer info
+
+
+class trainer():
+    def sex():
+        global sex
+        while True:
+            sex = input("That reminds me, are you a boy or girl?(or none?)\n")
+            if sex == "boy":
+                print("Way to go dawg!")
+                break
+            elif sex == "girl":
+                print("Nice bitch.")
+                break
+            elif sex == "none":
+                print("Nice to know.")
+                break
+            else:
+                print("Invalid response. Please try again.")
+                continue
+
+# Defining keywords
 
 
 class my():
@@ -52,7 +73,7 @@ keywords = ["Darshan", "Rohit"]
 mykeywords = ["Darshan", "Rohit"]
 
 menuactions = ["use item", "swap keywords", "fight", "run"]
-bag = ["potion", "super potion", "hyper potion"]
+bag = ["potion", "super potion", "hyper potion", "keyball"]
 
 choices1 = ["go", "dont go"]
 choices2 = ["run", "stay"]
@@ -61,15 +82,19 @@ fallprob = [1]
 wildprob = [1, 2, 5, 6, 9]
 runprob = [1, 11, 22, 33, 44, 55, 66, 77, 88, 99]
 suicidechance = [2, 4]
+catchprob1 = [3]
+catchprob2 = [2, 6, 5]
+cathcprob3 = [5, 7, 9, 2, 4, 6]
+catchprob4 = [3, 2, 1, 4, 5, 6, 7, 8, 9]
 
 # Items
+potions = 2
+superpotions = 1
+hyperpotions = 1
+keyballs = 5
 
 
 class items():
-    potions = 2
-    superpotions = 1
-    hyperpotions = 1
-
     def potion():
         global currentkeyword, currentkeywordhp, potions
         if potions >= 1:
@@ -99,6 +124,43 @@ class items():
             hyperpotions -= 1
         else:
             print("No Hyper Potions Left")
+
+    def throw_keyball():
+        global keyballs
+        if keyballs > 0:
+            print(currentkeyword + " throws the keyball at " + currentfoe)
+            if currentfoehp > 100:
+                x = random.randrange(1, 10)
+                if x in catchprob1:
+                    items.caught()
+                else:
+                    print(currentfoe + " escaped.")
+            elif currentfoehp <= 100 and currentfoehp > 50:
+                x = random.randrange(1, 10)
+                if x in catchprob2:
+                    items.caught()
+                else:
+                    print(currentfoe + "escaped.")
+            elif currentfoehp <= 50 and currentfoehp > 30:
+                x = random.randrange(1, 10)
+                if x in cathcprob3:
+                    items.caught()
+                else:
+                    print(currentfoe + " escaped.")
+            elif currentfoehp <= 30 and currentfoehp > 0:
+                x = random.randrange(1, 10)
+                if x in catchprob4:
+                    items.caught()
+                else:
+                    print(currentfoe + " escaped.")
+            keyballs -= 1
+        else:
+            print("No keyballs left...")
+
+    def caught():
+        global mykeywords
+        print("Congratulations! " + currentfoe + " was caught!")
+        mykeywords += str(currentfoe)
 
 # Experience and levelling up.
 
@@ -228,12 +290,11 @@ class myMoves():
         print(currentfoe + " Banged his head on the wall")
         print(currentfoe + " forgot Bang")
         bangd = random.randint(50, 75)
-        bangd = bangd * foedefmultiplier * myhitmultiplier
         currentfoehp -= bangd
         print(currentfoe + " lost " + str(bangd) + " HP")
 
     def football():
-        global currentfoehp, mydefmultiplier
+        global currentfoehp, mydefmultiplier, foedefmultiplier
         footballd = random.randint(30, 40)
         x = random.randrange(1, 10)
         print(currentkeyword + " used Football!")
@@ -246,6 +307,7 @@ class myMoves():
             print("Both of them got tired...")
             print(currentfoe + "'s and " + currentkeyword + "'s defense fell")
             mydefmultiplier -= 0.2
+            foedefmultiplier -= 0.1
 
     def stare():
         global foehitmultiplier, foedefmultiplier
@@ -266,6 +328,7 @@ class foeMoves():
         print("Wondering where?")
         print("HAHA. Youre lucky for now i havent added that feature to the game yet. Ill add it later.")
         bited = random.randrange(25, 30)
+        bited = bited * mydefmultiplier * foehitmultiplier
         print("It did " + str(bited) + " damage to " + currentkeyword)
         currentkeywordhp = currentkeywordhp - bited
 
@@ -282,7 +345,7 @@ class foeMoves():
         print(currentkeyword + " lost " + str(bangd) + " HP")
 
     def football():
-        global currentkeywordhp
+        global currentkeywordhp, mydefmultiplier, foedefmultiplier
         footballd = random.randint(30, 40)
         x = random.randrange(1, 10)
         print(currentfoe + " used Football!")
@@ -294,20 +357,27 @@ class foeMoves():
         else:
             print("Both of them got tired...")
             print(currentfoe + "'s and " + currentkeyword + "'s defense fell")
+            mydefmultiplier -= 0.2
+            foedefmultiplier -= 0.1
 
     def stare():
+        global mydefmultiplier, myhitmultiplier
         print(currentfoe + " used Stare")
         print(currentkeyword + " is feeling awkward")
-        print(currentkeyword + "'s hitmultiplier fell")
+        print(currentkeyword + "'s Defense fell")
+        mydefmultiplier -= 0.3
+        myhitmultiplier += 0.1
 
     def gk():
         global currentkeywordhp
         print(currentfoe + " used his general knowledge")
         gkd = random.randrange(28, 35)
+        gkd = gkd * foehitmultiplier * mydefmultiplier
         currentkeywordhp = currentkeywordhp - gkd
         print("It did " + str(gkd) + " damage to " + currentfoe + "!")
 
     def rap():
+        global myhitmultiplier, foehitmultiplier
         print(currentfoe + " started Rapping.")
         print("Kaun bola? Tujhse na ho paayega?")
         print("...")
@@ -319,6 +389,10 @@ class foeMoves():
 
         print(currentkeyword + " started cheering.")
         print(currentkeyword + " has an idol now.")
+        print(currentkeyword + "'s hitmultiplier fell.")
+        myhitmultiplier -= 0.1
+        print(currentfoe + "'s hitmultiplier rose!")
+        foehitmultiplier += 0.2
 
     def lipstick():
         global myhitmultiplier
@@ -419,7 +493,8 @@ def wildbattle():
                 items.superpotion()
             elif action4 in bag and action4 == "hyper potion":
                 items.hyperpotion()
-
+            elif action4 in bag and action4 == "keyball":
+                items.throw_keyball()
         # RUN
         elif action3 == "run":
             x = random.randrange(1, 101)
@@ -484,7 +559,7 @@ def wildbattle():
 
     elif currentfoehp <= 0:
         print("You won the battle.")
-        print(currentkeyword + " gained " + expgain + " EXP.")
+        print(currentkeyword + " gained " + str(expgain) + " EXP.")
         if currentkeyword == "Rohit":
             rohitexp = rohitexp + expgain
         elif currentkeyword == "Darshan":

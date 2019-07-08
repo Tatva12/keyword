@@ -69,8 +69,7 @@ while True:
         "Which part of the body do you wish to cover?\n[upper/lower]\n")
     if action5 == "upper":
         print("You quickly tie it around your chest.")
-        sex = input(
-            "That brings me to the question. Are you a boy or a girl?\n")
+        trainer.sex()
         print("Nice to know. Okay lets not get out of flow.")
         print("You tie it around your chest. It slides down and hangs on your hips.")
         print("You're way to lazy to bring it back up...")
@@ -103,7 +102,8 @@ print("You patiently wait for the way to be clear.")
 while True:
     print("You see no one as far as you can see.")
     print("Which even though is not a lot, but yeah you can still manage to see the Amogh in the far left trapped in a hole.")
-    action6 = input("What would you like to do?\n[help amogh/run for my appartment]\n")
+    action6 = input(
+        "What would you like to do?\n[help amogh/run for my appartment]\n")
     if action6 == "help amogh":
         print("You slowly, quietly tread towards amogh.")
         break
