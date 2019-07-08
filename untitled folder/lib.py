@@ -28,6 +28,9 @@ class trainer():
                 print("Invalid response. Please try again.")
                 continue
 
+    def name():
+        name = input("Please enter your name:\n")
+
 # Defining keywords
 
 
@@ -127,6 +130,7 @@ class items():
 
     def throw_keyball():
         global keyballs
+
         if keyballs > 0:
             print(currentkeyword + " throws the keyball at " + currentfoe)
             if currentfoehp > 100:
@@ -160,7 +164,8 @@ class items():
     def caught():
         global mykeywords
         print("Congratulations! " + currentfoe + " was caught!")
-        mykeywords += str(currentfoe)
+        mykeywords.append(currentfoe)
+        break
 
 # Experience and levelling up.
 
