@@ -1,17 +1,28 @@
 import random
 
+# Defining multipliers
+
+foedefmultiplier = None
+foehitmultiplier = None
+mydefmultiplier = None
+myhitmultiplier = None
+
 # Defining Keywords
 
 
 class my():
     def myrohit(myrohitlv):
-        global currentkeywordhp, currentmoveset, currentkeyword
+        global currentkeywordhp, currentmoveset, currentkeyword, myhitmultiplier, mydefmultiplier
+        myhitmultiplier = 1
+        mydefmultiplier = 1
         currentkeyword = "Rohit"
         currentkeywordhp = 139 + (myrohitlv * 8)
         currentmoveset = ["Rap", "GK", "Lipstick", "Pokemon"]
 
     def mydarshan(mydarshanlv):
-        global currentkeywordhp, currentmoveset, currentkeyword
+        global currentkeywordhp, currentmoveset, currentkeyword, myhitmultiplier, mydefmultiplier
+        myhitmultiplier = 1
+        mydefmultiplier = 1
         currentkeyword = "Darshan"
         currentkeywordhp = 139 + (mydarshanlv * 11)
         currentmoveset = ["Football", "PJ", "Stare", "Bite"]
@@ -19,13 +30,17 @@ class my():
 
 class foe():
     def foerohit(foerohitlv):
-        global currentfoehp, foemoveset, currentfoe
+        global currentfoehp, foemoveset, currentfoe, foedefmultiplier, foehitmultiplier
+        foehitmultiplier = 1
+        foedefmultiplier = 1
         currentfoehp = 141 + (foerohitlv * 9)
         foemoveset = ["Rap", "GK", "Lipstick", "Pokemon"]
         currentfoe = "Rohit"
 
     def foedarshan(foedarshanlv):
-        global currentfoehp, foemoveset, currentfoe
+        global currentfoehp, foemoveset, currentfoe, foedefmultiplier, foehitmultiplier
+        foehitmultiplier = 1
+        foedefmultiplier = 1
         currentfoehp = 141 + (foedarshanlv * 12)
         foemoveset = ["Football", "PJ", "Stare", "Bite"]
         currentfoe = "Darshan"
@@ -90,7 +105,7 @@ class items():
 
 rohitexp = 0
 darshanexp = 0
-expgain = random.randrange(100, 500)
+expgain = random.randrange(100, 400)
 
 
 if rohitexp >= 0 and rohitexp <= 500:
@@ -146,11 +161,13 @@ class myMoves():
     def gk():
         global currentfoehp
         print(currentkeyword + " used his general knowledge")
-        gkd = random.randrange(10, 25)
+        gkd = random.randrange(28, 35)
+        gkd = gkd * foedefmultiplier * myhitmultiplier
         currentfoehp = currentfoehp - gkd
         print("It did " + str(gkd) + " damage to " + currentfoe + "!")
 
     def rap():
+        global foehitmultiplier, myhitmultiplier
         print(currentkeyword + " started Rapping.")
         print("Kaun bola? Tujhse na ho paayega?")
         print("...")
@@ -162,13 +179,20 @@ class myMoves():
 
         print(currentfoe + " started cheering.")
         print(currentfoe + " has an idol now.")
+        print(currentfoe + "'s hitmultiplier fell.")
+        foehitmultiplier -= 0.1
+        print(currentkeyword + "'s hitmultiplier rose.")
+        myhitmultiplier += 0.2
 
     def lipstick():
+        global foehitmultiplier
         print(currentkeyword + " applied Lipstick")
         print(currentfoe + " is in love with " + currentkeyword + " now!")
+        print(currentfoe + "'s hitmultiplier fell!")
+        foehitmultiplier -= 0.2
 
     def pokemon():
-        global currentfoehp
+        global currentfoehp, foehitmultiplier
         print(currentkeyword + " used Pokemon")
         print(currentfoe + " started playing Pokemon with " + currentkeyword)
         print(currentfoe + " died in a gym battle in Pokemon.")
@@ -183,13 +207,15 @@ class myMoves():
         else:
             print(currentfoe + " decided not today! I'll kick this retard's ***!")
             print(currentfoe + "'s hitmultiplier rose harshly!")
+            foehitmultiplier += 0.4
 
     def bite():
         global currentfoehp
         print(currentkeyword + " bit " + currentfoe)
         print("Wondering where?")
-        print("HAHA. Youre lucky for now i havent added that feature to the game yet. Ill add it later.")
+        print("HAHA. Youre lucky for now I havent added that feature to the game yet. Ill add it later.")
         bited = random.randrange(25, 30)
+        bited = bited * foedefmultiplier * myhitmultiplier
         print("It did " + str(bited) + " damage to " + currentfoe)
         currentfoehp = currentfoehp - bited
 
@@ -202,11 +228,12 @@ class myMoves():
         print(currentfoe + " Banged his head on the wall")
         print(currentfoe + " forgot Bang")
         bangd = random.randint(50, 75)
+        bangd = bangd * foedefmultiplier * myhitmultiplier
         currentfoehp -= bangd
         print(currentfoe + " lost " + str(bangd) + " HP")
 
     def football():
-        global currentfoehp
+        global currentfoehp, mydefmultiplier
         footballd = random.randint(30, 40)
         x = random.randrange(1, 10)
         print(currentkeyword + " used Football!")
@@ -218,11 +245,16 @@ class myMoves():
         else:
             print("Both of them got tired...")
             print(currentfoe + "'s and " + currentkeyword + "'s defense fell")
+            mydefmultiplier -= 0.2
 
     def stare():
+        global foehitmultiplier, foedefmultiplier
         print(currentkeyword + " used Stare")
         print(currentfoe + " is feeling awkward")
-        print(currentfoe + "'s hitmultiplier fell")
+        print(currentfoe + "'s hitmultiplier rose")
+        print(currentfoe + "'s Defense fell.")
+        foehitmultiplier += 0.1
+        foedefmultiplier -= 0.3
 
 # FOE MOVES
 
@@ -271,7 +303,7 @@ class foeMoves():
     def gk():
         global currentkeywordhp
         print(currentfoe + " used his general knowledge")
-        gkd = random.randrange(10, 25)
+        gkd = random.randrange(28, 35)
         currentkeywordhp = currentkeywordhp - gkd
         print("It did " + str(gkd) + " damage to " + currentfoe + "!")
 
@@ -289,11 +321,13 @@ class foeMoves():
         print(currentkeyword + " has an idol now.")
 
     def lipstick():
+        global myhitmultiplier
         print(currentfoe + " applied Lipstick")
         print(currentkeyword + " is in love with " + currentfoe + " now!")
+        myhitmultiplier -= 0.2
 
     def pokemon():
-        global currentkekywordhp
+        global currentkekywordhp, myhitmultiplier
         print(currentfoe + " used Pokemon")
         print(currentkeyword + " started playing Pokemon with " + currentkeyword)
         print(currentkeyword + " died in a gym battle in Pokemon.")
@@ -309,7 +343,7 @@ class foeMoves():
         else:
             print(currentkeyword + " decided not today! I'll kick this retard's ***!")
             print(currentkeyword + "'s hitmultiplier rose harshly!")
-
+            myhitmultiplier += 0.4
 # Defining certain other functions.
 
 
@@ -444,11 +478,11 @@ def wildbattle():
                 randfoemove()
             continue
 
-    if currentkeywordhp == 0:
+    if currentkeywordhp <= 0:
         print("You lost the battle.")
         print("You gained no EXP .")
 
-    elif currentfoehp == 0:
+    elif currentfoehp <= 0:
         print("You won the battle.")
         print(currentkeyword + " gained " + expgain + " EXP.")
         if currentkeyword == "Rohit":
